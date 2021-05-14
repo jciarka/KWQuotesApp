@@ -3,9 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    
-    <StackPanel>
-        <TextBlock Text="{Binding Message}" FontSize="40" />
 
-    </StackPanel>
+    <DockPanel LastChildFill="True">
+        
+        <TextBlock DockPanel.Dock="Top"
+            Text="{Binding Title}" FontSize="30" TextAlignment="Center" />
+
+        <Grid Margin="10" DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>                
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="3*"/>
+
+            </Grid.ColumnDefinitions>
+            
+            <Label FontSize="20" Content="Type numbers of comments" 
+                    Grid.Column="1"/>
+
+            <TextBox Width="50" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" 
+                     Grid.Column="2" FontSize="25" />
+
+
+            <Button Content="Upload" Grid.Column="3" Width="60" FontSize="15"
+                    Command="{Binding Upload}" />
+
+            <TextBlock FontSize="15" Text="{Binding ErrorText}" 
+                       TextWrapping="Wrap"
+                       Grid.Column="4" Foreground="Red"/>
+            
+        </Grid>
+
+        <Button DockPanel.Dock="Bottom" Content="Analyse" 
+                Grid.Column="3" Margin="10" Width="80" Height="40" FontSize="15"
+                Command="{Binding Upload}"/>
+
+        <ListBox  DockPanel.Dock="Top"
+                  x:Name="Quotes" Grid.Row="2" Grid.Column="0"
+                  ItemsSource="{Binding Quotes}"
+                  SelectedItem="{Binding SelectedQuote}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,4,8,0">
+                        <TextBlock TextAlignment="Right" Text="{Binding}" 
+                                   TextWrapping="Wrap" FontSize="15"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+    </DockPanel>
 </UserControl>

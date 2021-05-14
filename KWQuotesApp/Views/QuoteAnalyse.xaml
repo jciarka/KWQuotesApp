@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel>
-        <TextBlock Text="{Binding Message}" FontSize="40" />
+        <TextBlock Text="{Binding Message}" FontSize="40" TextAlignment="Center" />
 
     </StackPanel>
 </UserControl>
