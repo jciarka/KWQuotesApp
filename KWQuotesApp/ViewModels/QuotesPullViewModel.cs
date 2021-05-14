@@ -85,7 +85,8 @@ namespace KWQuotesApp.ViewModels
 
         public void AnalyseSelected()
         {
-            // TODO:
+            quotesApiCilent.ValidateQuotes(Quotes,
+                                           ConfigurationManager.AppSettings["QuoteValidatorApiUrl"]);
         }
 
         public bool CanAnalyseSelected
@@ -109,7 +110,7 @@ namespace KWQuotesApp.ViewModels
             string quote;
             do
             {
-                quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteApiUrl"]);
+                quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteFetchApiUrl"]);
             } while (quotes.Contains(quote));
             quotes.Add(quote);
         }

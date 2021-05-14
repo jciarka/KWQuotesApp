@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,9 @@
     <Compile Include="Infrastructure\APIClient\QuotesAPIClient.cs" />
     <Compile Include="Infrastructure\APIClient\IQuotesApiClient.cs" />
     <Compile Include="Models\Quote.cs" />
+    <Compile Include="Models\Sentiment.cs" />
+    <Compile Include="Models\ValidatedQuote.cs" />
+    <Compile Include="Models\ValidatedQuotes.cs" />
     <Compile Include="ViewModels\QuoteAnalyseViewModel.cs" />
     <Compile Include="ViewModels\QuotesPullViewModel.cs" />
     <Compile Include="Views\QuoteAnalyse.xaml.cs">
@@ -119,5 +123,6 @@
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
