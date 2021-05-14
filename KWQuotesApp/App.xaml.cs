@@ -1,4 +1,5 @@
-﻿using KWQuotesApp.Views;
+﻿using KWQuotesApp.Infrastructure.APIClient;
+using KWQuotesApp.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
@@ -17,6 +18,8 @@ namespace KWQuotesApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<IQuotesApiClient>(new QuotesAPIClient());
+
             // te rejestracje są potrzebne dla przełączania widoków przez mechanzim RequestNavigate
             containerRegistry.RegisterForNavigation<QuotesPull>("QuotesPull");
             containerRegistry.RegisterForNavigation<QuoteAnalyse>("QuoteAnalyse");

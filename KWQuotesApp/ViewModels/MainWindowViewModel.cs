@@ -16,7 +16,7 @@ namespace KWQuotesApp.ViewModels
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
-        public IRegionManager regionManager { get; set; }
+        private IRegionManager regionManager { get; set; }
 
         public MainWindowViewModel(IRegionManager regionManager)
         {

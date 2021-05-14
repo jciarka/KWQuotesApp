@@ -1,16 +1,19 @@
-﻿using Prism.Commands;
+﻿using KWQuotesApp.Infrastructure.APIClient;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KWQuotesApp.ViewModels
 {
     public class QuotesPullViewModel : BindableBase, INavigationAware
     {
-        public QuotesPullViewModel()
+        public QuotesPullViewModel(IQuotesApiClient apiCilent)
         {
             Upload = new DelegateCommand(UploadQuotes, () => CanUploadQuotes)
                 .ObservesProperty(() => Quantity);
@@ -18,16 +21,12 @@ namespace KWQuotesApp.ViewModels
             Analyse = new DelegateCommand(AnalyseSelected, () => CanAnalyseSelected)
                 .ObservesProperty(() => SelectedQuote);
 
-            Quotes = new ObservableCollection<string>()
-            {
-                "abc",
-                "abc",
-                "abc",
-                "abc",
-                "abc",
-                "abc"
-            };
+            Quotes = new ObservableCollection<string>();
+
+            quotesApiCilent = apiCilent;
         }
+
+        private IQuotesApiClient quotesApiCilent { get; set; }
 
         private string title = "Upload Quotes";
         public string Title
@@ -67,21 +66,17 @@ namespace KWQuotesApp.ViewModels
 
         public DelegateCommand Upload { get; set; } 
 
-        public void UploadQuotes()
-        {
-
-        }
-
         public bool CanUploadQuotes
         {
             get
             {
                 if(quantity < 10 || quantity > 20)
                 {
-                    errorText = "Quantity must be between 10 an 20";
+                    ErrorText = "Quantity must be between 10 an 20";
                     return false;
                 }
-                errorText = "";
+
+                ErrorText = "";
                 return true;
             }
         }
@@ -101,8 +96,23 @@ namespace KWQuotesApp.ViewModels
             }
         }
 
+        private void UploadQuotes()
+        {
+            for (int i = 0; i < Quantity; i++)
+            {
+                UploadSingleQuote();
+            }
+        }
 
-
+        public async void UploadSingleQuote()
+        {
+            string quote;
+            do
+            {
+                quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteApiUrl"]);
+            } while (quotes.Contains(quote));
+            quotes.Add(quote);
+        }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 

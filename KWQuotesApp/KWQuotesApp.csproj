@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\APIClient\QuotesAPIClient.cs" />
+    <Compile Include="Infrastructure\APIClient\IQuotesApiClient.cs" />
+    <Compile Include="Models\Quote.cs" />
     <Compile Include="ViewModels\QuoteAnalyseViewModel.cs" />
     <Compile Include="ViewModels\QuotesPullViewModel.cs" />
     <Compile Include="Views\QuoteAnalyse.xaml.cs">
@@ -104,12 +107,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
