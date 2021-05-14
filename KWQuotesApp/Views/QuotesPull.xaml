@@ -37,7 +37,7 @@
 
         <Button DockPanel.Dock="Bottom" Content="Analyse" 
                 Grid.Column="3" Margin="10" Width="80" Height="40" FontSize="15"
-                Command="{Binding Upload}"/>
+                Command="{Binding Analyse}"/>
 
         <ListBox  DockPanel.Dock="Top"
                   x:Name="Quotes" Grid.Row="2" Grid.Column="0"

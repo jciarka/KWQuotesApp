@@ -15,7 +15,8 @@ namespace KWQuotesApp.ViewModels
             Upload = new DelegateCommand(UploadQuotes, () => CanUploadQuotes)
                 .ObservesProperty(() => Quantity);
 
-            Analyse = new DelegateCommand(AnalyseSelected, () => CanAnalyseSelected);
+            Analyse = new DelegateCommand(AnalyseSelected, () => CanAnalyseSelected)
+                .ObservesProperty(() => SelectedQuote);
 
             Quotes = new ObservableCollection<string>()
             {
