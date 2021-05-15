@@ -1,4 +1,5 @@
-﻿using KWQuotesApp.Infrastructure.APIClient;
+﻿using KWQuotesApp.Configuration;
+using KWQuotesApp.Infrastructure.APIClient;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -97,7 +98,7 @@ namespace KWQuotesApp.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("quote", selectedQuote);
-            regionManager.RequestNavigate("ContentRegion1", "QuoteAnalyse", parameters);
+            regionManager.RequestNavigate(RegionsNames.MainRegion, "QuoteAnalyse", parameters);
         }
 
         public bool CanAnalyseSelected
@@ -133,7 +134,7 @@ namespace KWQuotesApp.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("quotes", Quotes);
-            regionManager.RequestNavigate("ContentRegion1", "QuotesSummary", parameters);
+            regionManager.RequestNavigate(RegionsNames.MainRegion, "QuotesSummary", parameters);
         }
             
         private bool CanShowSummary

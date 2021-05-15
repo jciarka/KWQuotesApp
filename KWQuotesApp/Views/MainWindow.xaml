@@ -1,12 +1,13 @@
 ﻿<Window x:Class="KWQuotesApp.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:KWQuotesApp"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" MinHeight="500" MinWidth="700">
     <Grid>
         <ContentControl Grid.Row="1" Grid.Column="2" 
                         Margin="20"
-                        prism:RegionManager.RegionName="ContentRegion1" />
+                        prism:RegionManager.RegionName="{x:Static core:Configuration.RegionsNames.MainRegion}" />
     </Grid>
 </Window>

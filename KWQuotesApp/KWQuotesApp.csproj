@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Configuration\RegionsNames.cs" />
     <Compile Include="Infrastructure\APIClient\QuotesAPIClient.cs" />
     <Compile Include="Infrastructure\APIClient\IQuotesApiClient.cs" />
     <Compile Include="Models\Quote.cs" />

@@ -1,4 +1,5 @@
-﻿using KWQuotesApp.Infrastructure.APIClient;
+﻿using KWQuotesApp.Configuration;
+using KWQuotesApp.Infrastructure.APIClient;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -53,7 +54,7 @@ namespace KWQuotesApp.ViewModels
 
         private void navigateBack()
         {
-            regionManager.RequestNavigate("ContentRegion1", "QuotesPull");
+            regionManager.RequestNavigate(RegionsNames.MainRegion, "QuotesPull");
         }
 
 

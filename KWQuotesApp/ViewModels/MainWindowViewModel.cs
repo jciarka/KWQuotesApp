@@ -1,4 +1,5 @@
-﻿using KWQuotesApp.Views;
+﻿using KWQuotesApp.Configuration;
+using KWQuotesApp.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -26,7 +27,7 @@ namespace KWQuotesApp.ViewModels
             // If you want ViewA to apear imediately after iniziation of window 
             // RequestNavigate WILL NOT WORK
             // use RegisterViewWithRegion instead (ONLY at initiation)
-            regionManager.RegisterViewWithRegion("ContentRegion1", typeof(QuotesPull));
+            regionManager.RegisterViewWithRegion(RegionsNames.MainRegion, typeof(QuotesPull));
         }
 
         private void Navigate(string uri)
