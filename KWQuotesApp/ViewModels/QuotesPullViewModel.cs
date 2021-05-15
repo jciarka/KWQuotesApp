@@ -92,8 +92,9 @@ namespace KWQuotesApp.ViewModels
 
         public void AnalyseSelected()
         {
-            quotesApiCilent.ValidateSingleQuote(SelectedQuote,
-                                           ConfigurationManager.AppSettings["QuoteValidatorApiUrl"]);
+            var parameters = new NavigationParameters();
+            parameters.Add("quote", selectedQuote);
+            regionManager.RequestNavigate("ContentRegion1", "QuoteAnalyse", parameters);
         }
 
         public bool CanAnalyseSelected
