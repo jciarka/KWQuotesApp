@@ -13,13 +13,20 @@ namespace KWQuotesApp.ViewModels
 {
     public class QuotesPullViewModel : BindableBase, INavigationAware
     {
-        public QuotesPullViewModel(IQuotesApiClient apiCilent)
+        private readonly IRegionManager regionManager;
+
+        public QuotesPullViewModel(IQuotesApiClient apiCilent, IRegionManager regionManager)
         {
+            this.regionManager = regionManager;
+
             Upload = new DelegateCommand(UploadQuotes, () => CanUploadQuotes)
                 .ObservesProperty(() => Quantity);
 
             Analyse = new DelegateCommand(AnalyseSelected, () => CanAnalyseSelected)
                 .ObservesProperty(() => SelectedQuote);
+
+            Summary = new DelegateCommand(ShowSummary, () => CanShowSummary)
+                .ObservesProperty(() => Quotes.Count);
 
             Quotes = new ObservableCollection<string>();
 
@@ -85,7 +92,7 @@ namespace KWQuotesApp.ViewModels
 
         public void AnalyseSelected()
         {
-            quotesApiCilent.ValidateQuotes(Quotes,
+            quotesApiCilent.ValidateSingleQuote(SelectedQuote,
                                            ConfigurationManager.AppSettings["QuoteValidatorApiUrl"]);
         }
 
@@ -99,6 +106,7 @@ namespace KWQuotesApp.ViewModels
 
         private void UploadQuotes()
         {
+            quotes.Clear();
             for (int i = 0; i < Quantity; i++)
             {
                 UploadSingleQuote();
@@ -113,6 +121,27 @@ namespace KWQuotesApp.ViewModels
                 quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteFetchApiUrl"]);
             } while (quotes.Contains(quote));
             quotes.Add(quote);
+        }
+
+        public DelegateCommand Summary { get; set; }
+
+        private void  ShowSummary()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add("quotes", Quotes);
+            regionManager.RequestNavigate("ContentRegion1", "QuotesSummary", parameters);
+        }
+            
+        private bool CanShowSummary
+        {
+            get
+            {
+                if (Quotes.Count() == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;

@@ -33,7 +33,6 @@ namespace KWQuotesApp.ViewModels
         {
             if (uri != null)
             {
-
                 regionManager.RequestNavigate("ContentRegion1", uri, /* For test purposes*/(NavigationResult nr) =>
                 {
                     var error = nr.Error;

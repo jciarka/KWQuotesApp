@@ -18,11 +18,12 @@ namespace KWQuotesApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IQuotesApiClient>(new QuotesAPIClient());
+            containerRegistry.Register<IQuotesApiClient, QuotesAPIClient>();
 
             // te rejestracje są potrzebne dla przełączania widoków przez mechanzim RequestNavigate
             containerRegistry.RegisterForNavigation<QuotesPull>("QuotesPull");
             containerRegistry.RegisterForNavigation<QuoteAnalyse>("QuoteAnalyse");
+            containerRegistry.RegisterForNavigation<QuotesSummary>("QuotesSummary");
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

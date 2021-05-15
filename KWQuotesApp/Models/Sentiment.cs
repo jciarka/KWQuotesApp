@@ -8,7 +8,7 @@ namespace KWQuotesApp.Models
 {
     public class Sentiment
     {
-        public string polarity { get; set; }
+        public float polarity { get; set; }
         public string type { get; set; }
     }
 }

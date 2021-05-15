@@ -65,11 +65,15 @@
     <Compile Include="Models\ValidatedQuotes.cs" />
     <Compile Include="ViewModels\QuoteAnalyseViewModel.cs" />
     <Compile Include="ViewModels\QuotesPullViewModel.cs" />
+    <Compile Include="ViewModels\QuotesSummaryViewModel.cs" />
     <Compile Include="Views\QuoteAnalyse.xaml.cs">
       <DependentUpon>QuoteAnalyse.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuotesPull.xaml.cs">
       <DependentUpon>QuotesPull.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuotesSummary.xaml.cs">
+      <DependentUpon>QuotesSummary.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuotesPull.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuotesSummary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

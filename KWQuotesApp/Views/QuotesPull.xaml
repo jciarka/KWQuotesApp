@@ -35,9 +35,16 @@
             
         </Grid>
 
-        <Button DockPanel.Dock="Bottom" Content="Analyse" 
-                Grid.Column="3" Margin="10" Width="80" Height="40" FontSize="15"
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button DockPanel.Dock="Bottom" Content="Analyse selected" 
+                Grid.Column="3" Margin="10" Width="120" Height="40" FontSize="15"
                 Command="{Binding Analyse}"/>
+            
+            <Button DockPanel.Dock="Bottom" Content="View summary" 
+                Grid.Column="3" Margin="10" Width="120" Height="40" FontSize="15"
+                Command="{Binding Summary}"/>
+        </StackPanel>
+
 
         <ListBox  DockPanel.Dock="Top"
                   x:Name="Quotes" Grid.Row="2" Grid.Column="0"
