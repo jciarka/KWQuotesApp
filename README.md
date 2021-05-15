@@ -30,5 +30,5 @@ How to use application:
 Additional configuration:
 - API urls are typed in APP.config file,
 - min and max number of quotes to pull are typed in in APP.config file,
-- PRISM regions names available as a field of static class KWQuotesApp.
+- PRISM regions names available as a field of static class KWQuotesApp.Configuration.RegionsNames
 
