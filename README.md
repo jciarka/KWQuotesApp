@@ -8,7 +8,7 @@ General description:
 Pulling the code of application:
 - open Visual Studio
 - click "Clone a repository" option in menu at right side of window
-- type repository location form this site and choose desired location at you PC
+- type repository location from this site and choose desired location at you PC
 - click “Clone” button
 
 Compiling:
@@ -16,11 +16,12 @@ Compiling:
 - type ctrl+shift+B or click "Build solution" in Build section in menu bar
 
 Running:
+- open project in Visual Studio
 - click "Start" in Visual Studio or click "F5"
 
 How to use application:
 - after opening application you will see a main window 
-- type number of KW comments you wish to pull form API (from 5 to 20 available)
+- type number of KW comments you wish to pull from API (from 5 to 20 available)
 - press “Upload” button
 - comments will be presented in ListBox
 - Now you can:
