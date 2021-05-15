@@ -77,9 +77,12 @@ namespace KWQuotesApp.ViewModels
         {
             get
             {
-                if(quantity < 10 || quantity > 20)
+                int minCount = Int32.Parse(ConfigurationManager.AppSettings["minQuotesNum"]);
+                int maxCount = Int32.Parse(ConfigurationManager.AppSettings["maxQuotesNum"]);
+
+                if (quantity > maxCount || quantity < minCount)
                 {
-                    ErrorText = "Quantity must be between 10 an 20";
+                    ErrorText = $"Quantity must be between {minCount} and {maxCount}";
                     return false;
                 }
 
