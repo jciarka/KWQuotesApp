@@ -121,11 +121,18 @@ namespace KWQuotesApp.ViewModels
         public async void UploadSingleQuote()
         {
             string quote;
-            do
+            try
             {
-                quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteFetchApiUrl"]);
-            } while (quotes.Contains(quote));
-            quotes.Add(quote);
+                do
+                {
+                    quote = await quotesApiCilent.GetQuote(ConfigurationManager.AppSettings["QuoteFetchApiUrl"]);
+                } while (quotes.Contains(quote));
+                quotes.Add(quote);
+            }
+            catch(Exception e)
+            {
+                ErrorText = "Connection error. Try again later!";
+            };
         }
 
         public DelegateCommand Summary { get; set; }

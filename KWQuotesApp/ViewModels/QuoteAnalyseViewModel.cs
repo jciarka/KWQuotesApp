@@ -43,6 +43,13 @@ namespace KWQuotesApp.ViewModels
             set { SetProperty(ref title, value); }
         }
 
+        private string errorText = "";
+        public string ErrorText
+        {
+            get { return errorText; }
+            set { SetProperty(ref errorText, value); }
+        }
+
         public QuoteAnalyseViewModel(IRegionManager regionManager, IQuotesApiClient quotesApiClient)
         {
             this.quotesApiClient = quotesApiClient;
@@ -74,10 +81,19 @@ namespace KWQuotesApp.ViewModels
 
         private async void AnalyseQuote(string quote)
         {
-            var result = await quotesApiClient.ValidateSingleQuote(quote, ConfigurationManager.AppSettings["QuoteValidatorApiUrl"]);
+            ErrorText = "";
+            try
+            {
+                var result = await quotesApiClient.ValidateSingleQuote(quote, ConfigurationManager.AppSettings["QuoteValidatorApiUrl"]);
 
-            Polarity = result.result.polarity;
-            Type = result.result.type;
+                Polarity = result.result.polarity;
+                Type = result.result.type;
+            }
+            catch(Exception e)
+            {
+                ErrorText = "Connection error. Try again later.";
+            }
+
         }
     }
 }

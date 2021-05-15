@@ -69,8 +69,15 @@ namespace KWQuotesApp.ViewModels
             set { SetProperty(ref mostNegativePolarity, value); }
         }
 
-        private float neutralCount;
-        public float NeutralCount
+        private string errorText = "";
+        public string ErrorText
+        {
+            get { return errorText; }
+            set { SetProperty(ref errorText, value); }
+        }
+
+        private int neutralCount;
+        public int NeutralCount
         {
             get { return neutralCount; }
             set { SetProperty(ref neutralCount, value); }
@@ -108,6 +115,7 @@ namespace KWQuotesApp.ViewModels
 
         private async void AnalyseQuotes()
         {
+            ErrorText = "";
             
             List<Tuple<string, ValidatedQuote>> validatedQuotes = new List<Tuple<string, ValidatedQuote>>();
             List<Task<Tuple<string, ValidatedQuote>>> validationOperations = new List<Task<Tuple<string, ValidatedQuote>>>();
@@ -117,21 +125,27 @@ namespace KWQuotesApp.ViewModels
                 validationOperations.Add(task);
             }
 
-            foreach(var task in validationOperations)
+            try
             {
-                var result = await task;
-                validatedQuotes.Add(result);
+                foreach (var task in validationOperations)
+                {
+                    var result = await task;
+                    validatedQuotes.Add(result);
+                }
+
+                PositiveCount = validatedQuotes.Count(x => x.Item2.result.polarity > 0);
+                NegativeCount = validatedQuotes.Count(x => x.Item2.result.polarity < 0);
+                NeutralCount = validatedQuotes.Count(x => x.Item2.result.polarity == 0);
+
+                MostPositivePolarity = validatedQuotes.Max(x => x.Item2.result.polarity);
+                MostPositive = validatedQuotes.Find(x => x.Item2.result.polarity == mostPositivePolarity).Item1;
+                MostNegativePolarity = validatedQuotes.Min(x => x.Item2.result.polarity);
+                MostNegative = validatedQuotes.Find(x => x.Item2.result.polarity == MostNegativePolarity).Item1;
             }
-
-            PositiveCount = validatedQuotes.Count(x => x.Item2.result.polarity > 0);
-            NegativeCount = validatedQuotes.Count(x => x.Item2.result.polarity < 0);
-            NeutralCount = validatedQuotes.Count(x => x.Item2.result.polarity == 0);
-
-            MostPositivePolarity = validatedQuotes.Max(x => x.Item2.result.polarity);
-            MostPositive = validatedQuotes.Find(x => x.Item2.result.polarity == mostPositivePolarity).Item1;
-            MostNegativePolarity = validatedQuotes.Min(x => x.Item2.result.polarity);
-            MostNegative= validatedQuotes.Find(x => x.Item2.result.polarity == MostNegativePolarity).Item1;
-            
+            catch(Exception e)
+            {
+                ErrorText = "Connection error. Try agian alter.";
+            }
         }
 
         private async Task<Tuple<string, ValidatedQuote>> getValidationResult(string quote)
