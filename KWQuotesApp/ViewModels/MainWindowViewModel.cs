@@ -8,7 +8,7 @@ namespace KWQuotesApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "KW quotes analyser";
         public string Title
         {
             get { return _title; }
