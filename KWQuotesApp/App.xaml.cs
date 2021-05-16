@@ -6,9 +6,7 @@ using System.Windows;
 
 namespace KWQuotesApp
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
+
     public partial class App
     {
         protected override Window CreateShell()
@@ -20,7 +18,6 @@ namespace KWQuotesApp
         {
             containerRegistry.Register<IQuotesApiClient, QuotesAPIClient>();
 
-            // te rejestracje są potrzebne dla przełączania widoków przez mechanzim RequestNavigate
             containerRegistry.RegisterForNavigation<QuotesPull>("QuotesPull");
             containerRegistry.RegisterForNavigation<QuoteAnalyse>("QuoteAnalyse");
             containerRegistry.RegisterForNavigation<QuotesSummary>("QuotesSummary");

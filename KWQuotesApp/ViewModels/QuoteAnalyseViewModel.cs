@@ -65,7 +65,6 @@ namespace KWQuotesApp.ViewModels
         }
 
 
-
         public bool IsNavigationTarget(NavigationContext navigationContext) => false;
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
